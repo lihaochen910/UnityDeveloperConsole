@@ -64,6 +64,7 @@ namespace DeveloperConsole
                 ConsoleLog.LogWarrning("使用Post请求时出现错误:");
                 ConsoleLog.LogWarrning("响应状态:" + e.Status);
                 ConsoleLog.LogWarrning(e.Message);
+                ConsoleLog.LogWarrning(e.StackTrace);
             }
 
             //Dispose WebClient
@@ -73,5 +74,24 @@ namespace DeveloperConsole
                 return Encoding.UTF8.GetString(responseArray);
             else return "error";
         }
+    }
+
+    static class UserUtil
+    {
+        public static int getUserRID()
+        {
+            //return Convert.ToInt32(Tools.CallMethod("userModel", "getRID")[0]);
+            return 105906188;
+        }
+    }
+
+    static class Const
+    {
+        public const string Protocol = "http";
+        public const string IP = "106.75.36.113";
+        public const string Port = "2002";
+        public const string PATH = "/gm/";
+        public const string MSG_SINGLE_REWARD = "single_reward";
+        public const string MSG_DEL = "delete_";
     }
 }
