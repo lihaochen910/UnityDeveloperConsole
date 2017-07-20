@@ -1,3 +1,4 @@
+#if DEBUG
 using UnityEngine;
 
 public class ConsoleToggler : MonoBehaviour
@@ -40,3 +41,4 @@ public class ConsoleToggler : MonoBehaviour
         }
     }
 }
+#endif
