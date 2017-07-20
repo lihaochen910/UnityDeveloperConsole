@@ -5,14 +5,9 @@ using DeveloperConsole.CommandFramework;
 
 namespace DeveloperConsole.Commands
 {
-    [Command("add","添加道具/装备(add <type> <id> <num> [可选]<ex> \n 添加货币可以使用(add <moneyType> <num>)快速添加)",CommandType.Server)]
+    [Command("add","添加道具/装备(add <type> <id> <num> [可选]<ex> \n 添加货币可以使用(add <moneyType> <num>)快速添加)\n",CommandType.Server)]
     class Add : CommandBase
     {
-        private const string protocol = "http";
-        private const string ip = "106.75.36.113";
-        private const string port = "2002";
-        private const string path = "/gm/single_reward";
-
         public override string commandName
         {
             get
@@ -85,15 +80,15 @@ namespace DeveloperConsole.Commands
 
         private void Send(string type, int id, int num)
         {
-            //string url = protocol + "://" + ip + ':' + port + path + '?' +
+            //string url = Const.Protocol + "://" + Const.IP + ':' + Const.Port + Const.PATH + Const.MSG_SINGLE_REWARD + '?' +
             //             "roleid=" + getUserRID() +
             //             "&data={'rewardList':[{" + 
             //             "'type':'" + type + "'," + 
             //             "'name':" + id + "," +
             //             "'num':" + num +
             //             "}]}";
-            string url = protocol + "://" + ip + ':' + port + path;
-            string postData = @"roleid=" + getUserRID() +
+            string url = Const.Protocol + "://" + Const.IP + ':' + Const.Port + Const.PATH + Const.MSG_SINGLE_REWARD;
+            string postData = @"roleid=" + UserUtil.getUserRID() +
                          @"&data={""rewardList"":[{" +
                          @"""type"":""" + type + @"""," +
                          @"""name"":" + id + @"," +
@@ -107,8 +102,8 @@ namespace DeveloperConsole.Commands
 
         private void Send(string type, string moneyType, int num)
         {
-            string url = protocol + "://" + ip + ':' + port + path;
-            string postData = @"roleid=" + getUserRID() +
+            string url = Const.Protocol + "://" + Const.IP + ':' + Const.Port + Const.PATH + Const.MSG_SINGLE_REWARD;
+            string postData = @"roleid=" + UserUtil.getUserRID() +
                          @"&data={""rewardList"":[{" +
                          @"""type"":""" + type + @"""," +
                          @"""name"":""" + moneyType + @"""," +
@@ -122,8 +117,8 @@ namespace DeveloperConsole.Commands
 
         private void Send(string moneyType, int num)
         {
-            string url = protocol + "://" + ip + ':' + port + path;
-            string postData = @"roleid=" + getUserRID() +
+            string url = Const.Protocol + "://" + Const.IP + ':' + Const.Port + Const.PATH + Const.MSG_SINGLE_REWARD;
+            string postData = @"roleid=" + UserUtil.getUserRID() +
                          @"&data={""rewardList"":[{" +
                          @"""type"":""" + "currency" + @"""," +
                          @"""name"":""" + moneyType + @"""," +
@@ -137,8 +132,8 @@ namespace DeveloperConsole.Commands
 
         private void Send(string type, int id, int num, int ex)
         {
-            string url = protocol + "://" + ip + ':' + port + path;
-            string postData = @"roleid=" + getUserRID() +
+            string url = Const.Protocol + "://" + Const.IP + ':' + Const.Port + Const.PATH + Const.MSG_SINGLE_REWARD;
+            string postData = @"roleid=" + UserUtil.getUserRID() +
                          @"&data={""rewardList"":[{" +
                          @"""type"":""" + type + @"""," +
                          @"""name"":" + id + @"," +
@@ -149,12 +144,6 @@ namespace DeveloperConsole.Commands
             //ConsoleLog.Println();
             ConsoleLog.LogWarrning(ServerUtil.Post(url, postData));
             ConsoleLog.Println();
-        }
-
-        private int getUserRID()
-        {
-            //return Convert.ToInt32(Tools.CallMethod("userModel", "getRID")[0]);
-            return 105906188;
         }
     }
 }

@@ -1,18 +1,10 @@
-﻿using System;
-using System.Net;
-using System.Text;
-using DeveloperConsole;
-using DeveloperConsole.CommandFramework;
+﻿using DeveloperConsole.CommandFramework;
 
-namespace Assets.Scripts.Commands
+namespace DeveloperConsole.Commands
 {
-    [Command("del", "从服务器数据中删除一件装备/一个物品\n Usage:del <type> <id>", CommandType.Server)]
+    [Command("del", "从服务器数据中删除一件装备/一个物品\n Usage:del <type> <id>\n", CommandType.Server)]
     class Del : CommandBase
     {
-        private const string protocol = "http";
-        private const string ip = "106.75.36.113";
-        private const string port = "2002";
-        private const string path = "/gm/";
         public override string commandName
         {
             get
@@ -57,18 +49,13 @@ namespace Assets.Scripts.Commands
                         break;
                 }
             }
-            string url = protocol + "://" + ip + ':' + port + path + "delete_" + type;
-            string postData = @"roleid=" + getUserRID() +
+            string url = Const.Protocol + "://" + Const.IP + ':' + Const.Port + Const.PATH + Const.MSG_DEL + type;
+            string postData = @"roleid=" + UserUtil.getUserRID() +
                          @"&data={""uuid"":" + id +
                          @"}";
             ConsoleLog.LogWarrning(ServerUtil.Post(url,postData));
             ConsoleLog.Println();
         }
 
-        private int getUserRID()
-        {
-            //return Convert.ToInt32(Tools.CallMethod("userModel", "getRID")[0]);
-            return 105906188;
-        }
     }
 }
